@@ -1,0 +1,13 @@
+name: OnCall Deploy
+on:
+  push:
+    branches: [master]
+  paths: ["platforms/oncall/**"]
+
+jobs:
+  Deploy:
+    uses: ./.github/workflows/reusable-deployment-docker.yaml
+    with:
+      app_name: oncall
+      app_path: platforms/oncall
+      namespace: platforms

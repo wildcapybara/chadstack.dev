@@ -1,0 +1,13 @@
+name: Homepage Deploy
+on:
+  push:
+    branches: [master]
+  paths: ["platforms/homepage/**"]
+
+jobs:
+  Deploy:
+    uses: ./.github/workflows/reusable-deployment-docker.yaml
+    with:
+      app_name: homepage
+      app_path: platforms/homepage
+      namespace: platforms

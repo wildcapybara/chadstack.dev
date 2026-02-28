@@ -1,0 +1,13 @@
+name: Hello World Multiple Deploy
+on:
+  push:
+    branches: [master, stage, develop]
+  paths: ["examples/hello-world-multiple/**"]
+
+jobs:
+  Deployment:
+    uses: ./.github/workflows/reusable-deployment-docker.yaml
+    with:
+      namespace: examples
+      app_name: hello-world-multiple
+      app_path: examples/hello-world-multiple

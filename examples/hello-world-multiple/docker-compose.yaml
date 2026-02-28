@@ -1,0 +1,24 @@
+networks:
+  traefik:
+    external: true
+
+services:
+  app1:
+    image: traefik/whoami
+    restart: unless-stopped
+    networks: [traefik]
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-app1.entrypoints=web"
+      - "traefik.http.services.${COMPOSE_PROJECT_NAME}-app1.loadbalancer.server.port=80"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-app1.rule=Host(`${PREFIX}${NAMESPACE}-${APP_NAME}-app1.${DOMAIN}`)"
+
+  app2:
+    image: traefik/whoami
+    restart: unless-stopped
+    networks: [traefik]
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-app2.entrypoints=web"
+      - "traefik.http.services.${COMPOSE_PROJECT_NAME}-app2.loadbalancer.server.port=80"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-app2.rule=Host(`${PREFIX}${NAMESPACE}-${APP_NAME}-app2.${DOMAIN}`)"

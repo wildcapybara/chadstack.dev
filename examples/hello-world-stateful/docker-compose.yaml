@@ -1,0 +1,52 @@
+networks:
+  traefik:
+    external: true
+
+# NOTE: This volumes block is required
+volumes:
+  data:
+
+services:
+  app1:
+    image: traefik/whoami
+    restart: unless-stopped
+    networks: [traefik]
+    # Example 1: Bind mound (folder on the host machine)
+    # Working Directory: /opt/git/$REPO_NAME/$APP_PATH
+    volumes:
+      - ./config.yaml:/app/config.yaml:ro
+    labels:
+      # === AUTOMATIC BACKUP ===
+      - "chadstack.backup.enable=true"
+      - "chadstack.backup.type=filesystem"
+      - "chadstack.backup.policy=standard"
+      - "chadstack.backup.path=/app/config.yaml"
+      # === REVERSE PROXY ===
+      - "traefik.enable=true"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-app1.entrypoints=web"
+      - "traefik.http.services.${COMPOSE_PROJECT_NAME}-app1.loadbalancer.server.port=80"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-app1.rule=Host(`${PREFIX}${NAMESPACE}-${APP_NAME}-app1.${DOMAIN}`)"
+
+  app2:
+    image: traefik/whoami
+    restart: unless-stopped
+    networks: [traefik]
+    # Example 2: Named Volume (must be declared at top level "volumes" keyword)
+    # expected volume name: dev-examples-hello-world-stateful_data
+    volumes:
+      - data:/app/data
+    labels:
+      # === AUTOMATIC BACKUP ===
+      - "chadstack.backup.enable=true"
+      - "chadstack.backup.type=postgres"
+      - "chadstack.backup.policy=standard"
+      # === RETENTION POLICY ===
+      # NOTE: ONLY ADD RETENTION POLICY IF POLICY IS NOT SET
+      - "chadstack.backup.retention.daily=7"
+      - "chadstack.backup.retention.weekly=4"
+      - "chadstack.backup.retention.monthly=6"
+      # === REVERSE PROXY ===
+      - "traefik.enable=true"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-app2.entrypoints=web"
+      - "traefik.http.services.${COMPOSE_PROJECT_NAME}-app2.loadbalancer.server.port=80"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-app2.rule=Host(`${PREFIX}${NAMESPACE}-${APP_NAME}-app2.${DOMAIN}`)"

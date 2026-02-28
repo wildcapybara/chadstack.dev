@@ -1,0 +1,13 @@
+name: Proxy Deploy
+on:
+  push:
+    branches: [master]
+  paths: ["bootstrap/proxy/**"]
+
+jobs:
+  Deploy:
+    uses: ./.github/workflows/reusable-deployment-docker.yaml
+    with:
+      app_name: proxy
+      app_path: bootstrap/proxy
+      namespace: bootstrap

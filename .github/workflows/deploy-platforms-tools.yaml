@@ -1,0 +1,13 @@
+name: Tools Deploy
+on:
+  push:
+    branches: [master]
+  paths: ["platforms/tools/**"]
+
+jobs:
+  Deploy:
+    uses: ./.github/workflows/reusable-deployment-docker.yaml
+    with:
+      app_name: tools
+      app_path: platforms/tools
+      namespace: platforms

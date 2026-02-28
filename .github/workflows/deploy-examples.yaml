@@ -1,0 +1,27 @@
+name: Hello World Deploy
+on:
+  push:
+    branches: [develop]
+  paths: ["examples/**"]
+
+jobs:
+  HelloWorldStandard:
+    uses: ./.github/workflows/reusable-deployment-docker.yaml
+    with:
+      namespace: examples
+      app_name: hello-world-standard
+      app_path: examples/hello-world-standard
+
+  HelloWorldMultiple:
+    uses: ./.github/workflows/reusable-deployment-docker.yaml
+    with:
+      namespace: examples
+      app_name: hello-world-multiple
+      app_path: examples/hello-world-multiple
+
+  HelloWorldStateful:
+    uses: ./.github/workflows/reusable-deployment-docker.yaml
+    with:
+      namespace: examples
+      app_name: hello-world-stateful
+      app_path: examples/hello-world-stateful

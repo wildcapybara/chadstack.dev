@@ -1,0 +1,13 @@
+name: Uptime Deploy
+on:
+  push:
+    branches: [master]
+  paths: ["platforms/uptime/**"]
+
+jobs:
+  Deploy:
+    uses: ./.github/workflows/reusable-deployment-docker.yaml
+    with:
+      app_name: uptime
+      app_path: platforms/uptime
+      namespace: platforms

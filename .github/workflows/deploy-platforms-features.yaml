@@ -1,0 +1,13 @@
+name: Features Deploy
+on:
+  push:
+    branches: [master]
+  paths: ["platforms/features/**"]
+
+jobs:
+  Deploy:
+    uses: ./.github/workflows/reusable-deployment-docker.yaml
+    with:
+      app_name: features
+      app_path: platforms/features
+      namespace: platforms

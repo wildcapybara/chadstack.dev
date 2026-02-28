@@ -1,0 +1,13 @@
+name: Errors Deploy
+on:
+  push:
+    branches: [master]
+  paths: ["platforms/errors/**"]
+
+jobs:
+  Deploy:
+    uses: ./.github/workflows/reusable-deployment-docker.yaml
+    with:
+      app_name: errors
+      app_path: platforms/errors
+      namespace: platforms

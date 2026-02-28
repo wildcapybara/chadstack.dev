@@ -1,0 +1,13 @@
+name: Analytics Web Deploy
+on:
+  push:
+    branches: [master]
+  paths: ["platforms/analytics/**"]
+
+jobs:
+  Deploy:
+    uses: ./.github/workflows/reusable-deployment-docker.yaml
+    with:
+      app_name: analytics
+      app_path: platforms/analytics
+      namespace: platforms

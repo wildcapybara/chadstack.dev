@@ -1,0 +1,12 @@
+name: AppName Deploy
+on:
+  push:
+    branches: [master, stage, develop]
+  paths: ["appName/**"]
+
+jobs:
+  Deployment:
+    uses: ./.github/workflows/reusable-deployment-docker.yaml
+    with:
+      namespace: examples
+      app_name: monolith

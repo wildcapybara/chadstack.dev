@@ -1,0 +1,13 @@
+name: Change Detection Deploy
+on:
+  push:
+    branches: [master]
+  paths: ["platforms/changedetection/**"]
+
+jobs:
+  Deploy:
+    uses: ./.github/workflows/reusable-deployment-docker.yaml
+    with:
+      app_name: changedetection
+      app_path: platforms/changedetection
+      namespace: platforms

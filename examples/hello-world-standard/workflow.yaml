@@ -1,0 +1,13 @@
+name: Hello World Standard Deploy
+on:
+  push:
+    branches: [master, stage, develop]
+  paths: ["examples/hello-world-standard/**"]
+
+jobs:
+  Deployment:
+    uses: ./.github/workflows/reusable-deployment-docker.yaml
+    with:
+      namespace: examples
+      app_name: hello-world-standard
+      app_path: examples/hello-world-standard

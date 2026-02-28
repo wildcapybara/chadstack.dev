@@ -1,0 +1,13 @@
+name: Social Media Deploy
+on:
+  push:
+    branches: [master]
+  paths: ["platforms/socialmedia/**"]
+
+jobs:
+  Deploy:
+    uses: ./.github/workflows/reusable-deployment-docker.yaml
+    with:
+      app_name: socialmedia
+      app_path: platforms/socialmedia
+      namespace: platforms

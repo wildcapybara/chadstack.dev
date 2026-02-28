@@ -1,0 +1,20 @@
+name: AppName Deploy
+on:
+  push:
+    branches: [master, stage, develop]
+  paths: ["appName/**"]
+
+jobs:
+  Deployment-1:
+    uses: ./.github/workflows/reusable-deployment-docker.yaml
+    with:
+      namespace: examples
+      app_name: distributed
+      server_name: self-hosted-zone1-${{ github.ref_name }}
+
+  Deployment-2:
+    uses: ./.github/workflows/reusable-deployment-docker.yaml
+    with:
+      namespace: examples
+      app_name: distributed
+      server_name: self-hosted-zone2-${{ github.ref_name }}

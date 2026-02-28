@@ -1,0 +1,13 @@
+name: Hello World Stateful Deploy
+on:
+  push:
+    branches: [master, stage, develop]
+  paths: ["examples/hello-world-stateful/**"]
+
+jobs:
+  Deployment:
+    uses: ./.github/workflows/reusable-deployment-docker.yaml
+    with:
+      namespace: examples
+      app_name: hello-world-stateful
+      app_path: examples/hello-world-stateful

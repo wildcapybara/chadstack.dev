@@ -1,0 +1,13 @@
+name: API Test Deploy
+on:
+  push:
+    branches: [master]
+  paths: ["platforms/apitest/**"]
+
+jobs:
+  Deploy:
+    uses: ./.github/workflows/reusable-deployment-docker.yaml
+    with:
+      app_name: apitest
+      app_path: platforms/apitest
+      namespace: platforms
