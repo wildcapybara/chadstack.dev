@@ -31,18 +31,18 @@ jobs:
       DOMAIN: ${{ inputs.domain }}
       APP_NAME: ${{ inputs.app_name }}
       APP_PATH: ${{ inputs.app_path || inputs.app_name }}
-      STAGE: ${{ 
-        github.ref_name == 'stage' && 'stg' ||
-        github.ref_name == 'master' && 'prd' ||
-        github.ref_name == 'develop' && 'dev' ||
-        github.ref_name == 'preview' && 'pre' ||
-        github.ref_name
-      }}
     steps:
       - uses: actions/checkout@v4
       - name: Deploy
         run: |
           set -e # Exit immediately if any command exits with a non-zero status
+          export STAGE=$(case "$GITHUB_REF_NAME" in
+            stage) echo stg ;;
+            master) echo prd ;;
+            develop) echo dev ;;
+            preview) echo pre ;;
+            *) echo "$GITHUB_REF_NAME" ;;
+          esac)
           export COMPOSE_PROJECT_NAME="${STAGE}-${NAMESPACE}-${APP_NAME}"
           export REPO_PATH="/opt/git/${STAGE}-${{ github.event.repository.name }}"
           export PREFIX=""
