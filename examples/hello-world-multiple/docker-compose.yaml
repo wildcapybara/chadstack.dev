@@ -4,7 +4,7 @@ networks:
 
 services:
   app1:
-    image: traefik/whoami
+    image: traefik/whoamii
     restart: unless-stopped
     networks: [traefik]
     labels:
