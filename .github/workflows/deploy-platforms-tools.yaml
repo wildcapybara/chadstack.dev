@@ -1,8 +1,9 @@
 name: Tools Deploy
 on:
+  workflow_dispatch:
   push:
     branches: [master]
-  paths: ["platforms/tools/**"]
+  path: ["platforms/tools/**"]
 
 jobs:
   Deploy:

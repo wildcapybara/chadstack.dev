@@ -1,8 +1,9 @@
 name: Analytics Web Deploy
 on:
+  workflow_dispatch:
   push:
     branches: [master]
-  paths: ["platforms/analytics/**"]
+  path: ["platforms/analytics/**"]
 
 jobs:
   Deploy:

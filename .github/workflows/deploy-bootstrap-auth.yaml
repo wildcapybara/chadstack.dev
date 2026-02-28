@@ -1,8 +1,9 @@
 name: Auth Deploy
 on:
+  workflow_dispatch:
   push:
     branches: [master,stage]
-  paths: ["bootstrap/auth/**"]
+  path: ["bootstrap/auth/**"]
 
 jobs:
   Deploy:

@@ -1,8 +1,9 @@
 name: Hello World Multiple Deploy
 on:
+  workflow_dispatch:
   push:
     branches: [master, stage, develop]
-  paths: ["examples/hello-world-multiple/**"]
+  path: ["examples/hello-world-multiple/**"]
 
 jobs:
   Deployment:

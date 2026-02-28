@@ -1,8 +1,9 @@
 name: AppName Deploy
 on:
+  workflow_dispatch:
   push:
     branches: [master, stage, develop]
-  paths: ["appName/**"]
+  path: ["appName/**"]
 
 jobs:
   Deployment:

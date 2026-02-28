@@ -1,8 +1,9 @@
 name: API Test Deploy
 on:
+  workflow_dispatch:
   push:
     branches: [master]
-  paths: ["platforms/apitest/**"]
+  path: ["platforms/apitest/**"]
 
 jobs:
   Deploy:

@@ -1,8 +1,9 @@
 name: OnCall Deploy
 on:
+  workflow_dispatch:
   push:
     branches: [master]
-  paths: ["platforms/oncall/**"]
+  path: ["platforms/oncall/**"]
 
 jobs:
   Deploy:

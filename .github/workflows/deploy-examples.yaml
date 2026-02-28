@@ -1,8 +1,9 @@
 name: Hello World Deploy
 on:
+  workflow_dispatch:
   push:
     branches: [develop]
-  paths: ["examples/**"]
+  path: ["examples/**"]
 
 jobs:
   HelloWorldStandard:

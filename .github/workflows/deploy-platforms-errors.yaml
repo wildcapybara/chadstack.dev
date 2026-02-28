@@ -1,8 +1,9 @@
 name: Errors Deploy
 on:
+  workflow_dispatch:
   push:
     branches: [master]
-  paths: ["platforms/errors/**"]
+  path: ["platforms/errors/**"]
 
 jobs:
   Deploy:

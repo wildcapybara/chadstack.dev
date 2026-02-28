@@ -1,8 +1,9 @@
 name: Homepage Deploy
 on:
+  workflow_dispatch:
   push:
     branches: [master]
-  paths: ["platforms/homepage/**"]
+  path: ["platforms/homepage/**"]
 
 jobs:
   Deploy:

@@ -1,8 +1,9 @@
 name: Uptime Deploy
 on:
+  workflow_dispatch:
   push:
     branches: [master]
-  paths: ["platforms/uptime/**"]
+  path: ["platforms/uptime/**"]
 
 jobs:
   Deploy:

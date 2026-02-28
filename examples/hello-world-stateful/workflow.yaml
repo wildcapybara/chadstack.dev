@@ -1,8 +1,9 @@
 name: Hello World Stateful Deploy
 on:
+  workflow_dispatch:
   push:
     branches: [master, stage, develop]
-  paths: ["examples/hello-world-stateful/**"]
+  path: ["examples/hello-world-stateful/**"]
 
 jobs:
   Deployment:

@@ -1,8 +1,9 @@
 name: Change Detection Deploy
 on:
+  workflow_dispatch:
   push:
     branches: [master]
-  paths: ["platforms/changedetection/**"]
+  path: ["platforms/changedetection/**"]
 
 jobs:
   Deploy:

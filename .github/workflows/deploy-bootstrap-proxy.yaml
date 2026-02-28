@@ -1,8 +1,9 @@
 name: Proxy Deploy
 on:
+  workflow_dispatch:
   push:
     branches: [master]
-  paths: ["bootstrap/proxy/**"]
+  path: ["bootstrap/proxy/**"]
 
 jobs:
   Deploy:

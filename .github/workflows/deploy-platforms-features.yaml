@@ -1,8 +1,9 @@
 name: Features Deploy
 on:
+  workflow_dispatch:
   push:
     branches: [master]
-  paths: ["platforms/features/**"]
+  path: ["platforms/features/**"]
 
 jobs:
   Deploy:

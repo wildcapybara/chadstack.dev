@@ -1,8 +1,9 @@
 name: Social Media Deploy
 on:
+  workflow_dispatch:
   push:
     branches: [master]
-  paths: ["platforms/socialmedia/**"]
+  path: ["platforms/socialmedia/**"]
 
 jobs:
   Deploy:
