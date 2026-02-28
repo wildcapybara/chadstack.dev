@@ -30,12 +30,13 @@ jobs:
       NAMESPACE: ${{ inputs.namespace }}
       DOMAIN: ${{ inputs.domain }}
       APP_NAME: ${{ inputs.app_name }}
-      APP_PATH: ${{ inputs.app_path || inputs.app_name }}
+      APP_PATH: ${{ inputs.app_path }}
     steps:
       - uses: actions/checkout@v4
       - name: Deploy
         run: |
           set -e # Exit immediately if any command exits with a non-zero status
+          export APP_PATH="${APP_PATH:-$APP_NAME}"
           export STAGE=$(case "$GITHUB_REF_NAME" in
             stage) echo stg ;;
             master) echo prd ;;
