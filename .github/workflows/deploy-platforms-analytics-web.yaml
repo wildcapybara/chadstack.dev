@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: [master]
-  path: ["platforms/analytics/**"]
+    paths: ["platforms/analytics/**"]
 
 jobs:
   Deploy:

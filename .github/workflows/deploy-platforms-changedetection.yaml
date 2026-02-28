@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: [master]
-  path: ["platforms/changedetection/**"]
+    paths: ["platforms/changedetection/**"]
 
 jobs:
   Deploy:

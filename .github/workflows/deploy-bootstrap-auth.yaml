@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: [master,stage]
-  path: ["bootstrap/auth/**"]
+    paths: ["bootstrap/auth/**"]
 
 jobs:
   Deploy:

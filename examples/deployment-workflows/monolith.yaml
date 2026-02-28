@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: [master, stage, develop]
-  path: ["appName/**"]
+    paths: ["appName/**"]
 
 jobs:
   Deployment:

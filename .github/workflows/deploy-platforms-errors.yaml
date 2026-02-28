@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: [master]
-  path: ["platforms/errors/**"]
+    paths: ["platforms/errors/**"]
 
 jobs:
   Deploy:

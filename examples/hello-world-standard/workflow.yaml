@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: [master, stage, develop]
-  path: ["examples/hello-world-standard/**"]
+    paths: ["examples/hello-world-standard/**"]
 
 jobs:
   Deployment:
