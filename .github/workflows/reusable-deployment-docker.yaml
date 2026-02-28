@@ -28,9 +28,9 @@ jobs:
       cancel-in-progress: false
     env:
       NAMESPACE: ${{ inputs.namespace }}
-      DOMAIN: ${{ inputs.domain }}
       APP_NAME: ${{ inputs.app_name }}
       APP_PATH: ${{ inputs.app_path }}
+      DOMAIN: ${{ inputs.domain }}
     steps:
       - uses: actions/checkout@v4
       - name: Deploy
