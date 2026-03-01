@@ -48,10 +48,22 @@ jobs:
           export REPO_PATH="/opt/git/${STAGE}-${{ github.event.repository.name }}"
           export PREFIX=""
           [ "$STAGE" != "prd" ] && export PREFIX="${STAGE}-" # removes "prd-" from subdomain
+
           # sync repo files to host server (/opt/git must be mapped)
           mkdir -p $REPO_PATH
-          sudo rsync -a --delete ./ "$REPO_PATH/"
-          echo "Deploying $COMPOSE_PROJECT_NAME"
+          rclone sync ./ "$REPO_PATH"
           cd "$REPO_PATH/$APP_PATH"
+
+          # Prepare Private AGE Key to enable SOPS decryption
+          echo "${{ secrets.PRIVATE_SOPS_AGE_KEY }}" > /tmp/sops.key
+          export SOPS_AGE_KEY_FILE=/tmp/sops.key
+          chmod 600 /tmp/sops.key
+          CONFIG_FILE="config.${STAGE}.env"
+          SECRET_FILE="secret.${STAGE}.env"
+          [ -f $CONFIG_FILE ] && set -a && source $CONFIG_FILE && set +a && echo "Loaded config from $CONFIG_FILE"
+          [ -f $SECRET_FILE ] && set -a && source <(sops -d "$SECRET_FILE") && set +a && echo "Loaded secrets from $SECRET_FILE"
+          rm /tmp/sops.key
+
+          echo "Deploying $COMPOSE_PROJECT_NAME"
           docker compose pull
           docker compose up -d --force-recreate --build
